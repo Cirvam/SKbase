@@ -1,0 +1,21 @@
+# Maven
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# SQLite databases
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
