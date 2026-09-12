@@ -3,3 +3,5 @@ version: 0.1.0
 main: com.skriptdev.skbase.SKbase
 api-version: '26.2'
 description: Database and Skript integration addon
+depend:
+  - Skript
