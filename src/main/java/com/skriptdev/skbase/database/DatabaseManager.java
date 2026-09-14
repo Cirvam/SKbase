@@ -55,4 +55,16 @@ public class DatabaseManager {
             database.disconnect();
         }
     }
+
+    /**
+     * Initialize all databases
+     *
+     * @throws SQLException If a database cannot be initialized.
+     */
+    public void initializeAll() throws SQLException {
+        for (Database database : databases.values()) {
+            database.initialize();
+        }
+    }
 }
+

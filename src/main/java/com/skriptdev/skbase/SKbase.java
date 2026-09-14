@@ -42,6 +42,7 @@ public final class SKbase extends JavaPlugin {
 
         try {
             databaseManager.connectAll();
+            databaseManager.initializeAll();
 
 
             getLogger().info("Database connected successfully!");
