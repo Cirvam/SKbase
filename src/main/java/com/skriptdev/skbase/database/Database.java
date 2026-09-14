@@ -2,8 +2,6 @@ package com.skriptdev.skbase.database;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
 
 public interface Database {
@@ -49,16 +47,8 @@ public interface Database {
      */
     int executeUpdate(String sql, Object... parameters) throws SQLException;
 
-    /**
-     * Executes given sql query and returns resulting rows
-     *
-     * @param sql sql query to execute
-     * @param parameters Parameters to bind to the prepped statement
-     * @return List of rows returned by the query
-     * @throws SQLException If query cannot be executed
-     */
-    List<Map<String, Object>> query(String sql, Object... parameters) throws SQLException;
 
+    DatabaseResult query(String sql, Object... parameters) throws SQLException;
 
 
 

@@ -62,9 +62,17 @@ public class SQLiteDatabase implements Database {
     }
 
 
+    /**
+     * Executes a SQL query against the SQLite database.
+     *
+     * @param sql SQL query to execute
+     * @param parameters Parameters to bind to the prepared statement
+     * @return Database result containing the returned rows
+     * @throws SQLException if the query cannot be executed
+     */
     @Override
-    public List<Map<String, Object>> query(String sql, Object... parameters) throws SQLException {
-        List<Map<String, Object>> results = new ArrayList<>();
+    public DatabaseResult query(String sql, Object... parameters) throws SQLException {
+        List<DatabaseRow> results = new ArrayList<>();
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -73,26 +81,25 @@ public class SQLiteDatabase implements Database {
             }
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                ResultSetMetaData metaData = resultSet.getMetaData();
-                int columnCount = metaData.getColumnCount();
+                ResultSetMetaData metadata = resultSet.getMetaData();
+                int columnCount = metadata.getColumnCount();
 
                 while (resultSet.next()) {
-                    Map<String, Object> row = new HashMap<>();
+                    Map<String, Object> rowData = new HashMap<>();
+
                     for (int i = 1; i <= columnCount; i++) {
-                        String columnName = metaData.getColumnName(i);
+                        String columnName = metadata.getColumnName(i);
                         Object value = resultSet.getObject(i);
 
-                        row.put(columnName, value);
+                        rowData.put(columnName, value);
                     }
-                    results.add(row);
+
+                    results.add(new DatabaseRow(rowData));
                 }
-
             }
-
         }
-        return results;
 
-
+        return new DatabaseResult(results);
     }
 }
 
